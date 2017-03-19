@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1489589674 source:d:\practise\circleword\main.cpp
+	<iostream>
+	<vector>
+	<string>
+	<algorithm>
+	<map>
+
