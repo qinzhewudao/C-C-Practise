@@ -1,0 +1,102 @@
+/*
+牛牛手里有N根木棒,分别编号为1~N,现在他从N根里想取出三根木棒，使得三根木棒构成一个三角形,你能计算出牛牛有多少种取法吗?(考虑两种取法中使用的木棒编号有一个不一样就认为是不同的取法)。
+
+输入描述:
+首先输入一个正整数N，接下来的一行共有N个正整数表示每个木棒的长度。
+N ≤ 50, 木棒的长度 ≤ 10000.
+
+
+输出描述:
+输出一个整数表示方法数。
+
+输入例子:
+5
+1 2 3 4 5
+
+输出例子:
+3
+*/
+//法一，暴力
+/*
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    int N = 0;
+    vector<int> num;
+    while(cin>>N)
+    {
+        int count1 = 0;
+        int temp;
+        for(int i=0;i<N;++i)//注意不能直接输入cin>>num[i]下标只能用于获取已存在的元素，而现在的a[i]还是空的对象.
+        {
+            cin>>temp;
+            num.push_back(temp);
+        }
+
+        sort(num.begin(),num.end());
+        for(int i=0;i<N-2;++i)
+        {
+            for(int j=i+1;j<N;++j)
+            {
+                 for(int k=j+1;k<N;++k)
+                 {
+                        if(num[i]+num[j]>num[k])
+                        {
+                            count1++;
+                        }
+                 }
+
+            }
+
+        }
+        cout<<count1<<endl;
+        num.clear();
+    }
+    return 0;
+}*/
+//法二
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    int N = 0;
+    vector<int> num;
+    while(cin>>N)
+    {
+        int count1 = 0;
+        int temp;
+        for(int i=0;i<N;++i)//注意不能直接输入cin>>num[i]下标只能用于获取已存在的元素，而现在的a[i]还是空的对象.
+        {
+            cin>>temp;
+            num.push_back(temp);
+        }
+
+        sort(num.begin(),num.end());
+        for(int i=N-1;i>1;--i)
+        {
+            for(int j=i-1;j>0;--j)
+            {
+                 if(num[j]<num[i]/2)break; //二分判断一下
+                 for(int k=j-1;k>=0;--k)
+                 {
+                        if(num[k]+num[j]>num[i])
+                        {
+                            count1++;
+                        }
+                 }
+
+            }
+
+        }
+        cout<<count1<<endl;
+        num.clear();
+    }
+    return 0;
+}
