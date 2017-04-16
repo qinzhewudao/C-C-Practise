@@ -1,0 +1,65 @@
+/*
+
+
+众所周知计算机代码底层计算都是0和1的计算，牛牛知道这点之后就想使用0和1创造一个新世界！牛牛现在手里有n个0和m个1，给出牛牛可以创造的x种物品，每种物品都由一个01串表示。牛牛想知道当前手中的0和1可以最多创造出多少种物品。
+
+输入描述:
+输入数据包括x+1行：
+第一行包括三个整数x(2 ≤ x ≤ 20)，n(0 ≤ n ≤ 500)，m(0 ≤ m ≤ 500)，以空格分隔
+接下来的x行，每行一个01串item[i]，表示第i个物品。每个物品的长度length(1 ≤ length ≤ 50)
+
+
+输出描述:
+输出一个整数，表示牛牛最多能创造多少种物品
+
+
+
+输入例子:
+3 3 1
+
+1
+
+00
+
+100
+
+
+输出例子:
+2
+*/
+#include<iostream>
+#include<vector>
+#include<string>
+#include<cstring>
+using namespace std;
+int main()
+{
+    int x,n,m;
+    while(cin>>x>>n>>m)
+    {
+        vector<int> zero(x);
+        vector<int> one(x);
+        string current;
+        for(int i=0;i<x;++i)
+        {
+            cin>>current;
+            for(int j=0;j<current.size();++j)
+            {
+                if(current[j]=='0')
+                    zero[i]++;
+                 else
+                     one[i]++;
+            }
+        }
+        
+        int dp[n+1][m+1];
+        memset(dp,0,sizeof(dp));
+        for(int i=0;i<x;++i)
+            for(int j=n;j>=zero[i];--j)
+              for(int k=m;k>=one[i];--k)
+                  dp[j][k]=max(dp[j][k],dp[j-zero[i]][k-one[i]]+1);//从dp[M][N]开始是为了避免第i种//物品被多次计算 
+//设第i件物品所需的两种代价分别为a[i]和b[i]。两种代价可付出的最大值（两种背包容量）分别为u和v。物//品的价值为w[i]状态转移方程：dp[i][u][v] = max(dp[i-1][u][v] , w[i] + dp[i-1][u-a[i]][v-b[i]])      
+        cout<<dp[n][m]<<endl;
+    }
+    return 0;
+}
