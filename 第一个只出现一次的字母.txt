@@ -1,0 +1,31 @@
+#include<iostream>
+#include<vector>
+#include<string>
+#include<map>
+#include<algorithm>
+using namespace std;
+//利用map来统计字母出现次数，然后遍历string，发//现某处value为1便返回
+int main()
+{
+    string str;
+    while(cin>>str)
+    {
+        map<char,int> hash;
+        if(str.size()==0)cout<<"-1"<<endl;
+        for(int i=0;i<str.size();++i)
+        {
+            hash[str[i]]++;
+        }
+        for(int i=0;i<str.size();++i)
+        {
+            if(hash[str[i]]==1)
+            {
+              cout<<str[i]<<endl;
+              break;
+            }
+
+        }
+
+    }
+    return 0;
+}
