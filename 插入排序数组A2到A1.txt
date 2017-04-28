@@ -1,0 +1,46 @@
+/*
+有两个排序数组A1和A2，内存在A1的末尾有足够多的空余空间容纳A2，实现一个函数，把A2
+插入到A1，并且是有序的。
+*/
+#include <iostream>
+using namespace std;
+void fun(int a[],int len1,int b[],int len2)
+{
+    int i = len1+len2;
+    i--;
+    len1--;
+    len2--;
+    while(len1>=0&&len2>=0)
+    {
+        if(a[len1]>b[len2])
+        {
+           a[i--]=a[len1--];
+        }
+        else
+        {
+           a[i--]=b[len2--];
+        }
+    }
+    while(len1>=0)
+    {
+        a[i--]=a[len1--];
+    }
+    while(len2>=0)
+    {
+        a[i--]=b[len2--];
+    }
+}
+int main()
+{
+    int a[10] = {12,13,14,15};
+    int b[6] = {1,4,5,9,10};
+    int len1 = 4;
+    int len2 = 5;
+    fun(a,len1,b,len2);
+    for (int i=0; i<len1+len2; i++)
+    {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+    return 0;
+}
