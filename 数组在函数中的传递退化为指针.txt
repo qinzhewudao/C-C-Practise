@@ -1,0 +1,30 @@
+#include<iostream>
+#include<vector>
+#include<string>
+#include<map>
+#include<algorithm>
+using namespace std;
+int getsize(int data[])
+{
+    return sizeof(data);
+}
+int main()
+{
+    int data1[] = {1,2,3,4,5};
+    int size1 = sizeof(data1);
+
+    int* data2 = data1;
+    int size2 = sizeof(data2);
+
+    int size3 = getsize(data1);
+
+    cout<<size1<<"  "<<size2<<"  "<<size3;
+
+    return 0;
+}
+/*输出20 4  4
+size1表示5个整形的大小，
+size2是一个指针，
+size3是因为数组作为函数的参数传递时
+退化为了指针，所以结果仍然是4
+*/
