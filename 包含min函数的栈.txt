@@ -36,6 +36,7 @@ public:
             return -1;
         
     }
+private£º
     stack<int> datastack;
     stack<int> minstack; 
 };
