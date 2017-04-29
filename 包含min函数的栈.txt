@@ -1,0 +1,41 @@
+class Solution {
+public:
+    void push(int value) {
+        datastack.push(value);
+        if(minstack.empty())
+        {
+            minstack.push(value);
+        }
+        else
+        {
+            int minval = value<=minstack.top()?value:minstack.top();
+            minstack.push(minval);
+        }
+    }
+    void pop() {
+        if(!datastack.empty())
+        {
+           datastack.pop();
+           minstack.pop();
+        }
+    }
+    int top() {
+        if(!datastack.empty())
+        {
+            return datastack.top();             
+        }
+        else
+            return -1;
+    }
+    int min() {
+        if(!minstack.empty())
+        {
+            return minstack.top();
+        }
+        else
+            return -1;
+        
+    }
+    stack<int> datastack;
+    stack<int> minstack; 
+};
