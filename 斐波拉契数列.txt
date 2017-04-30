@@ -1,0 +1,20 @@
+/*大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。*/
+//还可以利用辅助数组，但是需要额外的开销，利用动态规划的下面做法最节//省空间与时间。
+//还可以用矩阵快速幂
+n<=39
+class Solution {
+public:
+    int Fibonacci(int n) {
+        if(n<=0)return 0;
+        int fn2 = 0;//f(n-2)与f(n-1)
+        int fn1 = 1;
+        while(n--)
+        {
+            fn1 += fn2;//fn1与fn2都向前推进
+            fn2 = fn1 - fn2;
+        }
+        
+        return fn2;
+
+    }
+};
