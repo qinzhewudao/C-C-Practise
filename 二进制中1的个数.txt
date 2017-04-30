@@ -1,0 +1,25 @@
+class Solution {
+public:
+     int  NumberOf1(int n) {
+         int count = 0;
+         /*while(n)
+         {
+             if(n&1)count++;
+             n >>= 1;
+         }*///负数右移补一造成了无限循环
+         /*int flag = 1;
+         while(flag)
+         {
+             if(n & flag)count++;
+             
+             flag <<= 1;
+         }*///逆向思维，山不过来我过去。让1左移来判断当前位上n是否为1
+         while(n)//以前在某道类似的题见过这种用法
+         {
+             count++;
+             n&=(n-1);
+         }
+         return count;
+         
+     }
+};

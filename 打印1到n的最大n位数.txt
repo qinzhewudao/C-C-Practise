@@ -1,0 +1,119 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+//打印数字
+void PrintStrNum(char* str)
+{
+	bool IsBegin = true;
+	int length = strlen(str);
+	for (int i = 0; i < length; ++i)
+	{
+		//不打印之前的0
+		if (IsBegin && str[i] != '0')
+			IsBegin = false;
+
+		if (IsBegin == false)
+			cout<<str[i];
+	}
+	cout<<endl;
+}
+
+//递归调用该函数进行统计数字
+void _PrintDigits(char* num,const int length,const int index)
+{
+	//所有位数统计完毕，可以打印
+	//并返回
+	if (index == length - 1)
+	{
+		PrintStrNum(num);
+		return;
+	}
+	//没有统计完毕，递归统计数字
+	for (int i = 0; i < 10; ++i)
+	{
+		num[index + 1] = i + '0';
+		_PrintDigits(num, length, index + 1);
+	}
+}
+
+//初始化及调用递归函数
+void PrintDigits(const int length)
+{
+	if (length <= 0)return;
+
+	char* num = new char[length + 1];
+	num[length] = '\0';
+	int index = 0;
+	for (int i = 0; i < 10; ++i)
+	{
+		num[0] = i + '0';
+		_PrintDigits(num, length, 0);
+	}
+}
+
+int main()
+{
+    PrintDigits(2);
+    return 0;
+}
+/*
+#include<iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <memory.h>
+using namespace std;
+int num[10];
+
+int add(int n)
+{
+    int isoverflow = 0;
+    int carry = 0;
+    int i;
+    for(i=9; i>=10-n; i--)
+    {
+        num[i] += carry;
+        if(i == 9)
+            num[i]++;
+
+        if(num[i] >= 10)
+        {
+            if(i == 10-n)
+            {
+                isoverflow = 1;
+            }
+            else
+            {
+                num[i] -= 10;
+                carry = 1;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+    return isoverflow;
+}
+
+int main()
+{
+    int n = 2;
+    memset(&num,0,sizeof(int)*10);
+    while(!add(n))
+    {
+        int flag = 0;
+        for(int i=10-n; i<10; i++)
+        {
+            if(num[i] != 0 || flag)
+            {
+                //如果是前面的零，则不输出；如果是后面的零，则输出
+                flag = 1;
+                cout<<num[i];
+            }
+        }
+        cout<<endl;
+    }
+    return 0;
+}
+*///数组做法
