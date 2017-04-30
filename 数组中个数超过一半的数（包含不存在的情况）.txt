@@ -1,0 +1,49 @@
+class Solution {
+public:
+    /*int MoreThanHalfNum_Solution(vector<int> numbers) {//抵消计数法，然后统计current的个数
+        int countnum = 0;
+        int current = 0;
+        for(int i=0;i<numbers.size();++i)
+        {
+            if(countnum == 0)
+            {
+                current=numbers[i];
+                countnum++;
+            }
+            else
+            {
+               if(current!=numbers[i])countnum--;
+               else
+                   countnum++;
+            }
+        }
+        
+        countnum = 0;
+        for(int i=0;i<numbers.size();++i)
+        {
+            if(current==numbers[i])
+                countnum++;
+        }
+        if(countnum>(numbers.size()/2))
+        {
+            return current;
+            
+        }
+        else
+        {
+            return  0;
+        }
+    }*/
+    
+    int MoreThanHalfNum_Solution(vector<int> numbers) {//利用map保存一下个数即可
+        map<int,int> hash;
+        for(int i=0;i<numbers.size();++i)
+        hash[numbers[i]]++;
+        for(int i=0;i<numbers.size();++i)
+        {
+            if(hash[numbers[i]]>(numbers.size()/2))
+                return numbers[i];
+        }
+        return 0;    
+    }
+};
