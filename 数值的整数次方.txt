@@ -1,0 +1,22 @@
+/*
+
+当n为偶数，a^n =（a^n/2）*（a^n/2）
+当n为奇数，a^n = a^[(n-1)/2] * a^[(n-1)/2] * a
+  举例： 
+      2^11 = 2^1 * 2^2 * 2^8
+      2^1011 = 2^0001 * 2^0010 * 2^1000
+*/
+class Solution {
+public:
+    double Power(double base, int exponent) {
+      if(base==0.0) return 0.0; 
+      long long p = abs((long long)exponent);
+      double r = 1.0;
+        while(p){
+            if(p & 1) r *= base;
+            base *= base;
+            p >>= 1;
+        }
+        return exponent < 0 ? 1/r : r;
+    }
+};
