@@ -1,0 +1,46 @@
+//统计一个数字在排序数组中出现的次数。 
+class Solution {
+public:
+    int GetNumberOfK(vector<int> data ,int k) {
+        int size = data.size();
+        if(size == 0)return 0;
+        
+        int left = getleft(data,k);
+        int right = getright(data,k);
+        
+        return right-left+1;
+    }
+    
+    int getleft(vector<int>data,int k)
+    {
+        int start=0,end = data.size()-1;
+        int mid = start+(end-start)/2;
+        while(start<=end)
+        {
+            if(data[mid]<k)start=mid+1;
+            else
+            {
+                end = mid-1;
+            }
+            mid = start+(end-start)/2;
+        }
+        
+        return start;
+    }
+    int getright(vector<int>data,int k)
+    {
+        int start=0,end = data.size()-1;
+        int mid = start+(end-start)/2;
+        while(start<=end)
+        {
+            if(data[mid]<=k)start=mid+1;
+            else
+            {
+                end = mid-1;
+            }
+            mid = start+(end-start)/2;
+        }
+        
+        return end;
+    }
+};
