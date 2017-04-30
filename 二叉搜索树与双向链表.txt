@@ -1,0 +1,37 @@
+/*
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+			val(x), left(NULL), right(NULL) {
+	}
+};*/
+class Solution {
+public:
+    TreeNode* temp=NULL;//操作中的temp节点
+    TreeNode* root=NULL;//最小头节点
+    TreeNode* Convert(TreeNode* pRootOfTree)
+    {
+        ConvertSub(pRootOfTree);
+        return root;
+    }
+    
+    void ConvertSub(TreeNode* pRootOfTree)
+    {
+        if(NULL==pRootOfTree)return;
+        ConvertSub(pRootOfTree->left);//中序遍历，二叉搜索树便为排序数组
+        if(NULL == temp)
+        {
+            temp = pRootOfTree;
+            root = pRootOfTree;
+        }
+        else
+        {
+            temp->right = pRootOfTree;
+            pRootOfTree->left = temp;
+            temp = pRootOfTree;
+        }
+        ConvertSub(pRootOfTree->right);
+    }
+};
