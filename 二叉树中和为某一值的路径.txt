@@ -1,0 +1,32 @@
+/*
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+			val(x), left(NULL), right(NULL) {
+	}
+};*/
+class Solution {
+public:
+    vector<vector<int> > allResult;
+    vector<int> tmp;
+    void dfsFind(TreeNode* root,int expectNumber)
+    {
+        tmp.push_back(root->val);
+        if(expectNumber-root->val==0 && !root->left && !root->right)//到底
+        {
+            allResult.push_back(tmp);//路径入队
+        }
+        else//dfs
+        {
+            if(root->left) dfsFind(root->left,expectNumber-root->val);
+            if(root->right) dfsFind(root->right,expectNumber-root->val);
+        }
+        tmp.pop_back();//寻找下一条路径
+    }
+    vector<vector<int> > FindPath(TreeNode* root,int expectNumber) {
+        if(root) dfsFind(root,expectNumber);
+        return allResult;
+    }
+};
