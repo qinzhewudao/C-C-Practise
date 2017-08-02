@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void prePermutation(vector<string> &result,int k,string str)
+    {
+        if(k == str.size()-1)
+            result.push_back(str);
+        
+        for(int i=k;i<str.size();++i)//遍历第k位可能出现的字母
+        {
+            if(i!=k && str[i]==str[k])//去掉重复的情况
+                continue;
+            swap(str[i],str[k]);
+            prePermutation(result,k+1,str);
+
+        }
+    }
+    vector<string> Permutation(string str) {
+        vector<string> result;
+        sort(str.begin(),str.end());//注意字典序
+        prePermutation(result,0,str);
+        return result;
+    }
+};
+
+
+/*
+
+输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+输入描述:
+
+输入一个字符串,长度不超过9(可能有字符重复),字符只包括大小写字母。
+
+*/
