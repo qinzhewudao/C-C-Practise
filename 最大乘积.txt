@@ -1,0 +1,111 @@
+/*给定一个无序数组，包含正数、负数和0，要求从中找出3个数的乘积，使得乘积最大，要求时间复杂度：O(n)，空间复杂度：O(1) 
+求出最小的两个元素以及最大的三个元素
+因为乘积最大的两种情况：最大三元素相乘
+最大和最小的两个元素三数相乘
+*/
+/*
+不知道为什么只过了一半的例子
+您的代码已保存
+答案错误:您提交的程序没有通过所有的测试用例
+case通过率为44.44%
+
+测试用例:
+4
+1 -5 -2 3
+
+对应输出应该为:
+
+30
+
+你的输出为:
+
+40
+这个明明该是40啊
+搞不懂。。。
+*/
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    
+    vector<long long> max;
+    vector<long long> min;
+    long long tmp;
+    int count = 0;
+    long long result;
+    while(cin>>tmp)
+    {
+        count++;
+        if(count < 3)
+        {
+            max.push_back(tmp);
+            min.push_back(tmp);
+        }
+        else if(count==3)
+        {
+            max.push_back(tmp);
+            if(tmp<min[0]&&tmp<min[1])
+            {
+                if(min[0]>=min[1])
+                    min[0]=tmp;
+                else 
+                    min[1]=tmp;
+            }
+            else if(tmp<=min[0]&&tmp>=min[1])
+            {
+                min[0]=tmp;
+            }
+            else if(tmp>=min[0]&&tmp<=min[1])
+            {
+                min[1]=tmp;
+            }
+        }
+        else if(count > 3)
+        {
+            sort(max.begin(),max.end());
+            if(tmp>max[2])
+            {
+                max[0] = max[1];
+                max[1] = max[2];
+                max[2] = tmp;
+            }
+            else if(tmp<max[2]&&tmp>=max[1])
+            {
+                max[0] = max[1];
+                max[1] = tmp;
+            }
+            else if(tmp<max[1]&&tmp>=max[0])
+            {
+                max[0] = tmp;
+            }
+            
+            if(tmp<min[0]&&tmp<min[1])
+            {
+                if(min[0]>=min[1])
+                    min[0]=tmp;
+                else 
+                    min[1]=tmp;
+            }
+            else if(tmp<=min[0]&&tmp>=min[1])
+            {
+                min[0]=tmp;
+            }
+            else if(tmp>=min[0]&&tmp<=min[1])
+            {
+                min[1]=tmp;
+            }
+        }
+    }
+    result = max[0]*max[1]*max[2];
+    if(max[2]*min[0]*min[1]>result)
+        result = max[2]*min[0]*min[1];
+    cout<<result<<endl;
+    max.clear();
+    min.clear();
+    return 0;
+}
