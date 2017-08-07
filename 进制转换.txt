@@ -1,0 +1,37 @@
+/*16进制转换为10进制输出*/
+#include <iostream>
+#include<vector>
+#include<algorithm>
+#include<map>
+#include<string>
+using namespace std;
+
+int main()
+{
+    /*int num;//太取巧
+    while(cin>>hex>>num)//按十六进制读入
+    {
+        cout<<num<<endl;
+    }*/
+    string num;
+
+    while(cin>>num)
+    {
+       int result=0;
+       for(int i=2;i<num.size();++i)
+       {
+           if(num[i]>='0' && num[i]<='9')
+           {
+              result = result*16+(num[i]-'0');
+           }
+
+           else if(num[i]>='A' && num[i]<='F')
+               result = result*16+(num[i]-'A'+10);
+           else if(num[i]>='a' && num[i]<='f')
+               result = result*16+(num[i]-'a'+10);
+       }
+       cout<<result<<endl;
+    }
+
+    return 0;
+}
