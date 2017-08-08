@@ -1,0 +1,56 @@
+/*
+按要求分解字符串，输入两个数M，N；M代表输入的M串字符串，N代表输出的每串字符串的位数，不够补0。例如：输入2,8， “abc” ，“123456789”，则输出为“abc00000”,“12345678“,”90000000”
+*/
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+
+int main()
+{
+    int N=0;
+    int M=0;
+    while(cin>>M>>N)
+    {
+        string temp;
+        vector<string> str;
+        for(int i=0;i<M;++i)
+        {
+            cin>>temp;
+            str.push_back(temp);
+        }
+        for(int i=0;i<str.size();++i)
+        {
+            int length = str[i].size();
+            if(length <= N)
+            {
+                cout<<str[i];
+                for(int l = length;l<N;++l)
+                    cout<<'0';
+                cout<<endl;
+            }
+            else
+            {
+                int circle = length / N;
+                for(int k=0;k<circle;++k)
+                {
+                    for(int j=0;j<N;++j)
+                    {
+                        cout<<str[i][k*N+j];
+                    }
+                    cout<<endl;
+                }
+                for(int l = length%N;l>0;--l)
+                    cout<<str[i][length-l];
+                for(int l = N-length%N;l>0;--l)
+                    cout<<'0';
+                cout<<endl;
+
+            }
+        }
+        str.clear();
+
+    }
+    return 0;
+}
