@@ -1,0 +1,42 @@
+/*
+运行时间限制：无限制
+内容限制：       无限制
+输入：              字符串
+输出：              去除重复字符并排序的字符串
+样例输入：       aabcdefff
+样例输出：       abcdef
+*/
+#include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+using namespace std;
+
+
+int main()
+{
+    string str;
+    while(cin>>str)
+    {
+       map<char,int> hash;
+       vector<char> cha;
+
+       for(int i=0;i<str.size();++i)
+       {
+          hash[str[i]]++;
+       }
+       for(int i=0;i<256;++i)
+       {
+          if(hash[i]!=0)
+            cha.push_back(i);
+
+       }
+       for(int i=0;i<cha.size();++i)
+        cout<<cha[i];
+       cout<<endl;
+       hash.clear();
+       cha.clear();
+
+    }
+    return 0;
+}
