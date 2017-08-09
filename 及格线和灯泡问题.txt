@@ -1,0 +1,70 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <map>
+
+using namespace std;
+
+/*
+10个学生考完期末考试评卷完成后，
+A老师需要划出及格线，要求如下：
+(1) 及格线是10的倍数；
+(2) 保证至少有60%的学生及格；
+(3) 如果所有的学生都高于60分，则及格线为60分 输入
+*/
+void getmidgrade()
+{
+    int number;
+    int N  =10;
+    vector<int> grade;
+    for(int i=0;i<10;++i)
+    {
+        cin>>number;
+        grade.push_back(number);
+
+    }
+    sort(grade.begin(),grade.end());
+    if(grade[0]>60)
+        cout<<'60'<<endl;
+    else
+        cout<<grade[4]/10*10<<endl;
+}
+
+/*
+基本思路：
+
+对于任何一盏灯，由于它原来不亮，那么当它
+的开关被按奇数次时，灯是开着的；当它的开
+关被按偶数次时，灯是关着的；一盏灯的开关
+被按的次数，恰等于这盏灯的编号的因数的个
+数；要求哪些灯还亮着，就是问哪些灯的编号
+的因数有奇数个．显然完全平方数有
+奇数个因数。每个数除以一个数A等于另一个
+数B，那么A和B都是它的因数，于是因数是成
+对出现的，但是要因数是奇数，就必须A=B所
+以这个数就必须是一个是的平方得到的。*/
+
+void getsquare(int n)
+{
+    int count=0;
+    for(int i=1;;++i)
+    {
+        if(i*i<=n)
+        {
+            count++;
+        }
+
+        else
+            break;
+    }
+    cout<<count<<endl;
+}
+
+int main()
+{
+    int N;
+    while(cin>>N)
+        cout<<getsquare(N)<<endl;
+    return 0;
+}
