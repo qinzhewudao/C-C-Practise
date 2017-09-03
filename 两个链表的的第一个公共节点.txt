@@ -1,0 +1,56 @@
+/*
+struct ListNode {
+	int val;
+	struct ListNode *next;
+	ListNode(int x) :
+			val(x), next(NULL) {
+	}
+};*/
+class Solution {
+public:
+    ListNode* FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2) {
+        ListNode* temp1 = pHead1;
+        ListNode* temp2 = pHead2;
+        int i = 0;
+        int j = 0;
+        while(temp1)
+        {
+            temp1 = temp1->next;
+            i++;
+        }
+        while(temp2)
+        {
+            temp2 = temp2->next;
+            j++;
+        }
+        if(temp1 != temp2)
+            return NULL;
+        if(i>=j)
+        {
+            for(int k=0;k<i-j;++k)
+            {
+                pHead1 = pHead1->next;
+            }
+        }
+        if(j>=i)
+        {
+            for(int k=0;k<j-i;++k)
+            {
+                pHead2 = pHead2->next;
+            }
+        }
+        for(int k=0;k<min(i,j);++k)
+        {
+            if(pHead1 == pHead2)return pHead1;
+            else
+                {
+                pHead1 = pHead1->next;
+                pHead2 = pHead2->next;
+            }    
+        }
+        return NULL;
+        
+    }
+};
+
+//注意要返回NULL，在结束的时候，否则，可能造成无返回的情况
