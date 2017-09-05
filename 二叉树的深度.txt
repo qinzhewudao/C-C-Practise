@@ -1,0 +1,41 @@
+/*
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+			val(x), left(NULL), right(NULL) {
+	}
+};*/
+class Solution {
+public:
+    int TreeDepth(TreeNode* pRoot)
+    {
+       if(!pRoot)return 0;
+       queue<TreeNode* > queue1;
+       queue1.push(pRoot);
+       int depth = 0;
+       int count = 0;
+       int nextCount = 1;
+       while(!queue1.empty())
+       {
+           TreeNode* node = queue1.front();
+           queue1.pop();
+           count++;
+           if(node->left)
+               queue1.push(node->left);
+           if(node->right)
+               queue1.push(node->right);
+           if(count == nextCount){
+                nextCount = queue1.size();
+                count = 0;
+                depth++;
+            }
+       }
+       return depth;
+    }
+};
+/*这是利用层序遍历实现的，方法是利用一个nextcount记录树的每一层的大小，当走到末尾时就是深度加一*/
+/*更简单的方法*/
+       if(!pRoot)return 0;
+           return max(1+TreeDepth(pRoot->left),1+TreeDepth(pRoot->right));
