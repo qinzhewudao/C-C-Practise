@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool balance = true;
+         
+    bool IsBalanced_Solution(TreeNode* pRoot) {
+        getDepth(pRoot);
+        return balance;
+    }
+    
+    int getDepth(TreeNode* pRoot)//求深度
+    {
+        if(!pRoot)
+            return 0;
+        
+        int left = getDepth(pRoot->left);
+        int right = getDepth(pRoot->right);
+        
+        if(abs(left-right)>1)
+            balance = false;
+        
+        return max(1+left,1+right);
+        
+    }
+};
+
+/*输入一棵二叉树，判断该二叉树是否是平衡二叉树。
+平衡二叉树的定义，每个节点的左右儿子深度差距不大于一。*/
