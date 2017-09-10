@@ -1,0 +1,64 @@
+/*
+ 题目描述：英文单词有很多非常相似，比如：see和seek、cat和cut等，现在提供3种编辑操作：insert、remove、replace，通过在单词1上进行这些操作，可以让单词1变成单词2
+
+那么问题来了，如何只用最小次数的编辑操作，可以让字符串1变成字符串2？
+
+说明：
+
+1）3种编辑操作的代价是一样的
+
+2）并且每次只能操作一个字符串的一个字母
+
+3）只需要考虑在字符串1上进行编辑操作即可
+
+输入
+
+输入一行，有两个字符串，以空格分隔。
+
+输出
+
+输出为最小编辑次数。
+
+样例输入
+
+geek gesek
+
+样例输出
+
+1
+*/
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string str1,str2;
+    while(cin>>str1>>str2)
+    {
+        int len1 = str1.size();
+        int len2 = str2.size();
+        int cost = 1;
+        vector<vector<int> > dp(len1+1,vector<int>(len2+1,0));
+        for(int i=0;i<=len1;i++)
+            dp[i][0]=i;
+        for(int j=0;j<=len2;j++)
+            dp[0][j]=j;
+        for(int i=1;i<=len1;i++)
+        {
+            for(int j=1;j<=len2;j++)
+            {
+                if(str1[i-1]==str2[j-1])
+                    cost=0;
+                else
+                    cost=1;
+
+                dp[i][j]=min(min(dp[i-1][j]+1,dp[i][j-1]+1),dp[i-1][j-1]+cost);//insert，delete，replace
+            }
+        }
+        cout<<dp[len1][len2]<<endl;
+        str1.clear();
+        str2.clear();
+        dp.clear();
+    }
+    return 0;
+}
