@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <windows.h>
+#include <stdlib.h>
+#include <conio.h>
+
+//从逻辑上来说是什么结构？线性结构 
+//存储结构？ 
+//先进先出
+
+
+//用数组来实现队列
+int que[5];//但是只存放5个数据
+int real=0;//保存当前下标
+int n_front=0;//取值的下标
+int count=0;//记录元素的个数
+
+void push(int data)//插入元素
+{
+	//先写第一种 不考虑假满的情况	
+    
+	//如何保证数据先进先出
+  if(count==5)
+  {
+	  printf("队列已满\n");
+	  return;
+  }
+  que[real]=data;
+  real=(real+1)%5;//循环右移
+  count++;  
+}
+void pop()//移除栈顶元素
+{
+	if(count==0)
+	{
+		printf("队列为空\n");
+		return;
+	}
+	n_front=(n_front+1)%5;
+	count--;
+}
+int front()//返回栈顶元素 但是不删除
+{
+	if (count==0)
+	{
+		return -1;
+	}
+   return que[n_front];
+}
+void main()
+{
+
+
+	//数据结构 处理大量数据
+	//简单的说，数据结构就是数据跟数据之间的关系
+	// 数据的逻辑结构  数据的存储结构 数据的运输
+	//int a[20];//数组再逻辑上是线性结构
+	//链表也是一种线性结构
+
+	//数组顺序存储结构
+	//链表 链式存储
+
+	//链表在内存里面不是顺序存储
+	//怎么通过第一个元素找到第二个
+    push(1);
+	push(2);
+	push(7);
+	push(5);
+	push(9);
+	push(3);
+
+	int data;
+	pop();
+	push(4);
+
+	while(1)
+	{
+		data=front();
+		if(data==-1)
+			break;
+		printf("%d ",data);
+		pop();
+		
+	}
+	putchar('\n');
+
+
+}
+
